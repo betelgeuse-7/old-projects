@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Welcome</title>
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        #search-users-form input[type="search"] {
+            transition: .7s;
+            border: none;
+            outline: none;
+            width: 250px;
+            height: 30px;
+            background-color: rgba(240, 160, 81, 0.7);
+            box-sizing: border-box;
+            padding: 5px 10px 5px 10px;
+            color: rgba(0,0,0,.7);
+            font-size: 14px;
+        }
+
+        #search-users-form input[type="search"]:focus{
+            transition: .7s;
+            background-color: rgba(240, 160, 81, 1);
+        }
+
+        #search-users-form button[type='submit'] {
+            transition: .4s;
+            border: none;
+            outline: none;
+            width: 4%;
+            height: 30px;
+            color: rgba(0,0,0,.7);
+            font-size: 15px;
+            background-color:  rgba(219, 139, 58, 0.7);
+        }
+
+        #search-users-form button[type='submit']:hover{
+            transition: .4s;
+            background-color: rgba(219, 139, 58, 0.3);
+        }
+
+        #search-users-form{
+            position: relative;
+            left: 77.49%;
+            top: 2.5%;
+        }
+        @media (max-width:480px){
+            #search-users-form{
+                position: relative;
+                left: 80px;
+            }
+        }
+    </style>
+
+    <head>
+        <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    </head>
+    <form action="/search-for-users/" method="GET" id ='search-users-form'>
+        {% csrf_token %}
+        <input type="search" name = 'userq' placeholder="Search for users">
+        <button type='submit'>Search</button>
+    </form>
+    <div class = 'container'>
+        <h1>
+            Posts from people you are following
+        </h1>
+
+        {% if following_users_posts %}
+
+                {% for post in following_users_posts %}
+                <article>
+                    <section class="post-text">
+                        <p> {{post.text}} </p>
+                    </section>
+                    <div class="author-container">
+                        <section class="post-author">
+                            <p> <a href=" {% url 'blogApp:profile_detail_page' post.author.pk %} " class = 'post-author'>{{post.author}}</a></p>
+                        </section>
+                    </div>
+                    <div class = 'category-container'>
+                        <section class="post-category">
+                            <p> {{post.category}} </p>
+                            <span id = 'date'> {{ post.pub_date|date:"d/m/Y G:i" }} </span>
+                            <span id ='like-count'> Likes: {{post.likes.all | length}} </span>
+                            {% if request.user.is_authenticated %}
+                            <form action=" {% url 'blogApp:like_post' post.id %} " method="POST">
+                                {% csrf_token %}
+                                <button type="submit" name = 'post_like_button' value = ' {{post.pk}} ' class = 'like-button'> Like </button>
+                            </form>
+                            {% endif %}
+                        </section>
+                    </div>
+                </article>
+                
+        
+                        {% endfor %}
+
+        {% else %}
+            <p>No posts</p>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+{% endblock %}

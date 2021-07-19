@@ -1,0 +1,37 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+
+<title> Ürün arama: {{query}} </title>
+<link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+
+{% endblock %}
+
+
+{% block base %}
+
+    <div class="container">
+        <div class="results">
+            {% if urunler %}
+                {% for urun in urunler %}
+                    <div class="urun" onclick="location.href='/urun/{{urun.slug}}' ">
+                        {% if urun.urun_resmi %}
+                            <img src=" {{urun.get_urun_resmi}} " alt="{{urun.ad}}">
+                        {% elif urun.urun_resmi_url %}
+                            <img src=" {{urun.urun_resmi_url}} " alt="{{urun.ad}}">
+                        {% endif %}
+                            <h3> {{urun.ad}} </h3>
+                            <small> {{urun.fiyat}} </small>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2> Bu arama için sonuç bulunamadı. </h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

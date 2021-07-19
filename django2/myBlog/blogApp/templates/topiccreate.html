@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+    <title>
+        New Topic :D
+    </title>
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+    .topic-form-container{
+        text-align: center;
+        margin-top: 10%;
+    }
+    label{
+        display: none;
+    }
+    #id_category_name{
+        background-color: rgba(200, 76, 204, 0.6);
+        border: none;
+        outline: none;
+        width: 20%;
+        height: 40px;
+        font-size: 20px;
+        color: rgba(255,255,255, .83);
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    #id_category_name:focus{
+        background-color: rgba(200, 76, 204, 0.9);
+        box-shadow: 1px 1px 1px rgba(183, 59, 187, 0.8);
+    }
+
+    #new-topic-button{
+        transition: .6s;
+        width: 10%;
+        height: 25px;
+        background-color: rgba(183, 59, 187, 0.8) ;
+        border: none;
+        outline: none;
+        color: rgba(255,255,255, .83);
+    }
+
+    #new-topic-button:hover{
+        transition: .6s;
+        width: 13%;
+        height: 30px;
+        box-shadow: 2px 2px 2px rgba(159, 48, 163, 0.8);
+        font-size: 20px;
+    }
+    
+    #header{
+        color: rgba(0,0,0,.7);
+        margin-bottom: 10px;
+    }
+</style>
+
+
+
+
+<div class="topic-form-container">
+    <form action="" method='POST'>
+        <h2 id = 'header'>New Topic★</h2>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value='Create' id = 'new-topic-button'>
+    </form>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

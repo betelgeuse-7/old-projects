@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.f-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.register {
+  display: block;
+  width: 50%;
+}
+
+.register form {
+  margin-top: 20px;
+}
+
+.register h1 {
+  font-weight: 500;
+  font-size: 33px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.register label {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.input {
+  width: 180px;
+  border: 1px solid #000;
+  outline: none;
+  padding: 1px;
+}
+
+.register input[type="submit"] {
+  display: block;
+  position: relative;
+  left: 6%;
+  top: 10px;
+  border: none;
+  outline: none;
+  width: 12%;
+  height: 25px;
+  background-color: var(--button-green);
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.register #magaza-ac {
+  float: right;
+  position: relative;
+  top: -40px;
+  color: var(--link-color);
+  border: none;
+  font-size: 20px;
+}

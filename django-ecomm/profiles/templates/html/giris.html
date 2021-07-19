@@ -1,0 +1,32 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Üye girişi</title>
+    <link rel="stylesheet" href=" {% static 'css/giris.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+{% endblock %}
+
+
+{% block base %}
+
+<div class="form-container">
+    <a href=" {% url 'profiles:magaza-giris' %} "><h2>Mağaza girişi <i class="fas fa-chevron-right"></i></h2></a>
+    <form action="" method='POST'>
+        <h1>Giriş yap</h1>
+        <br>
+        {% csrf_token %}
+
+        <label for="k-adi">Kullanıcı adı:</label>
+        <input type="text" name='k-adi' class = 'input'>
+
+        <label for="sifre">Şifre:</label>
+        <input type="password" name='sifre' class = 'input'>
+
+        <input type="submit" value="Giriş yap">
+
+    </form>
+</div>
+
+
+{% endblock %}

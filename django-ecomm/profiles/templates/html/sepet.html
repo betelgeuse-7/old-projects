@@ -1,0 +1,38 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Sepet | {{request.user.username}} </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/sepet.css' %} ">
+{% endblock %}
+
+{% block base %}
+
+<div class="container">
+    <h1 id="title">Sepetinizdeki ürünler</h1>
+
+</div>
+
+
+<div class="container">
+    <div class="urun-container">
+        {% for urun in sepetteki_urunler %}
+                <div class="urun" onclick="location.href='/urun/{{urun.slug}}' ">
+                    {% if urun.urun_resmi %}
+                        <img src=" {{urun.get_urun_resmi}} " alt="" class="resim">
+                        <h1 class="ad"> {{urun.ad|slice:'0:40'}}... </h1>
+                        <h3 class="satici"> {{urun.satici.gorunen_ad}} </h3>
+                    {% elif urun.urun_resmi_url %}
+    
+                        <img src=" {{urun.urun_resmi_url}} " alt="" class="resim">
+                        <h1 class="ad"> {{urun.ad|slice:'0:40'}}... </h1>
+                        <h3 class="satici"> {{urun.satici.gorunen_ad}} </h3>
+                    {% endif %}
+                </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

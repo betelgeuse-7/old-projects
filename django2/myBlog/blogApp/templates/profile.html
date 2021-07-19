@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>  {{user_context.username}} </title>
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+article{
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-right: 50%;
+}
+
+section{
+    background-color: #d68493;
+    margin-bottom: 0.5%;
+    padding-bottom: 10px;
+}
+
+section:hover{
+    background-color: #d47082;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    margin-bottom: 0.5%;
+}
+
+
+
+.user-info{
+    color: rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+#follow{
+    text-decoration: none;
+    color: rgba(0,0,0,.6);
+    font-size: 17px;
+    padding: 0px;
+    font-weight: 600;
+}
+
+#username{
+    text-align: center;
+    padding-bottom: 3%;
+    font-size: 35px;
+    background-color: #edc96f;
+}
+#date-joined{
+    font-size: 20px;
+}
+#user-posts-length{
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
+}
+#post-text{
+    font-size: 23px;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+#delete{
+    text-decoration: none;
+    color: #ebb7ab;
+    background-color: #df6041;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 15px;
+    margin-left: 47.2%;
+
+}
+
+#edit{
+    text-decoration: none;
+    color: #f7c954;
+}
+
+#following{
+    background-color: rgba(173,216,230, .2);
+    position: relative;
+    right: 20%;
+    margin-top: 3%;
+    width: 20%;
+    margin-right: 5%;
+    float: right;
+    text-align: center;
+}
+
+#following h2{
+    color: rgba(0,0,0,0.7);
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    padding-bottom: 5px;
+}
+
+#following p{
+    color: rgba(0,0,0,0.7);
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}
+
+
+</style>
+
+{% if request.user.username == user_context.username %}
+    <div id = 'following'>
+        <h2>Following</h2>
+        {% for user in user_follows %}   
+            <p>{{user}}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<article class="profile-wrapper">
+
+    {% if user_context %}
+
+    <div id = 'username'>
+        <p class = 'user-info'>{{user_context.username}}</p>
+        <p class = 'user-info' id = 'date-joined'>Joined {{user_context.date_joined|date:"d/m/Y G:i"}}</p>
+        <p class = 'user-info' id = 'user-posts-length'><strong>{{user_posts|length}}</strong> total posts </p>
+
+
+        {% if user_context in logged_in_user_follows %}
+            {% if user_context != request.user %}
+                <p>You are following him/her</p>
+                <a href=" {% url 'blogApp:unfollow_user_page' user_context.id %} " id = 'follow'>Unfollow</a>
+        {% endif %}
+        
+        {% else %}
+        {% if user_context != request.user %}
+                <a href=" {% url 'blogApp:follow_user_page' user_context.id %} " id ='follow'>Follow</a>
+        {% endif %}
+
+
+
+        {% endif %}
+    </div>
+
+    {% else %}
+    <p class = 'user-info'>no user data</p>
+    {% endif %}
+    
+    {% if user_posts %}
+    
+    {% for post in user_posts %}
+    <section>
+        <p class = 'user-info' id = 'post-text'>{{post.text}}</p>
+        <p class = 'user-info'>{{post.pub_date|date:"d/m/Y G:i"}}</p>
+        <p class = 'user-info'>{{post.category}}</p>
+        <p class = 'user-info'>
+            <strong><small>{{post.likes.all|length}}</small></strong> likes
+        </p>
+        {% if post.author == request.user %}
+        <span> <a href=" {% url 'blogApp:delete_post_page' post.id %} " id = 'delete'>Delete</a> </span>
+        <span> <a href=" {% url 'blogApp:post_update_page' post.id %} " id = 'edit'> Edit </a> </span>
+        {% endif %}
+    </section>
+    
+    
+    
+    {% endfor %}
+    {% else %}
+    <p class = 'user-info'>no posts</p>
+    
+    {% endif %}
+    
+</article>
+
+
+{% endblock %}

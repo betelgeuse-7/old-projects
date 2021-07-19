@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-red: #ea222f;
+  --link-color: #007dda;
+  --border-color: #dedede;
+  --button-green: #27c007;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.container {
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 15vh;
+  background-color: #fbfbfb;
+  border-bottom: 3px solid #000;
+}
+
+.logo {
+  font-size: 2.8rem;
+  margin-left: 400px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 620px;
+  height: 35%;
+}
+
+.search-input {
+  height: 40px;
+  width: 580px;
+  border: 3px solid var(--main-red);
+  padding: 10px;
+  outline: none;
+}
+
+.search-icon {
+  color: white;
+  background-color: var(--main-red);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account {
+  margin-right: 400px;
+}
+
+.account h3 {
+  font-weight: 450;
+}
+
+.auth {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--link-color);
+  width: auto;
+}
+
+#logo {
+  width: 130px;
+  height: 110px;
+  cursor: pointer;
+}
+
+#register {
+  margin-left: 15px;
+}
+
+.tr-icon {
+  color: #000;
+}
+
+.fas {
+  cursor: pointer;
+}
+
+.fa-bell {
+  position: relative;
+  bottom: 2px;
+  margin-left: 20px;
+}
+
+.fa-shopping-cart {
+  position: relative;
+  bottom: 2px;
+  margin-left: 13px;
+}
+
+.side-bar {
+  width: 350px;
+}
+
+.cat-strip {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 35px;
+}
+
+.cat-strip h2 {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+  bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+li {
+  transition: 0.2s;
+  padding-left: 20px;
+}
+
+li:hover {
+  transition: 0.2s;
+  background-color: #000;
+  color: #fff;
+}
+
+.feed {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(220px, auto);
+  width: 870px;
+  height: auto;
+  padding: 35px;
+}
+
+.card {
+  width: 250px;
+  height: 220px;
+  cursor: pointer;
+  margin-bottom: 100px;
+}
+
+.card h4,
+p {
+  text-align: center;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.sellers {
+  width: 100%;
+}
+
+.sellers h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px 0px;
+}
+
+.s-search {
+  width: 400px;
+}
+
+.sellers input[type="search"] {
+  border: 2px solid var(--main-red);
+  outline: none;
+  padding: 5px;
+  width: 270px;
+}
+
+.sellers i {
+  background-color: var(--main-red);
+  color: #fff;
+  width: 21px;
+  padding: 7.6px 2.1px;
+}
+
+.sellers li {
+  line-height: 35px;
+}
+
+#cat-h {
+  font-weight: 500;
+  font-size: 23px;
+  margin: 5px 0px 20px 10%;
+  display: block;
+  border-bottom: 2px solid var(--border-color);
+}
+
+#my-acc {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--link-color);
+}
+
+.acc-dropdown {
+  background-color: var(--link-color);
+  width: auto;
+  height: auto;
+  padding: 15px;
+  position: absolute;
+  top: 95px;
+  left: 1410px;
+  opacity: 0.7;
+  border-radius: 5px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.acc-dropdown a {
+  color: #fff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.hidden {
+  display: none;
+}

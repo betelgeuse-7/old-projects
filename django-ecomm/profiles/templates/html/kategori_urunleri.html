@@ -1,0 +1,55 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+
+    <title>Kategori-{{k_adi}} </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/kategori_urunleri.css' %} ">
+
+{% endblock %}
+
+{% block base %}
+
+
+
+
+
+    {% if urunler %}
+    <h1 id="title"> {{k_adi}} kategorisindeki ürünler </h1>
+        <div class="container">
+            {% for urun in urunler %}
+            <!-- Stupid -->
+            <div class="prod-card">
+                <section class="prod" onclick="location.href= '/urun/{{urun.slug}}' ">
+                    {% if urun.urun_resmi %}
+                        <img src=" {{ urun.get_urun_resmi }} " alt=" {{urun.ad}} ">
+                        <h2> {{urun.ad}} </h2>
+                        <h3> {{urun.fiyat}} </h3>
+                    {% elif urun.urun_resmi_url %}
+                        <img src=" {{ urun.urun_resmi_url }} " alt=" {{urun.ad}} ">
+                        <h2> {{urun.ad}} </h2>
+                        <h3> {{urun.fiyat}} ₺ </h3>
+                    {% else %}
+                        <h2> {{urun.ad}} </h2>
+                        <h3> {{urun.fiyat}} ₺ </h3>
+                    {% endif %}
+                </section>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="container">
+            <h1>Ürün yok.</h1>
+        </div>
+
+    {% endif %}
+
+
+
+
+
+
+
+
+{% endblock %}

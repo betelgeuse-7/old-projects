@@ -1,0 +1,41 @@
+
+.form-group{
+    height: 400px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.card{
+    margin-top: 40px;
+}
+
+.author{
+    float:right;
+
+}
+
+.image{
+    width: 200px;
+    height: 200px;
+}
+
+
+.title{
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.content{
+    font-size: 20px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+}
+
+.alert-danger {
+    margin-top: 40px;
+}
+

@@ -1,0 +1,40 @@
+.magaza-form {
+  width: 40%;
+  display: flex;
+  margin-left: 25%;
+  margin-top: 5%;
+}
+
+.magaza-form form {
+  width: 100%;
+}
+
+.magaza-form label {
+  display: block;
+}
+
+.input {
+  width: 180px;
+  border: 1px solid #000;
+  outline: none;
+  padding: 1px;
+}
+
+textarea {
+  resize: none;
+  width: 50%;
+}
+
+.magaza-form input[type="submit"] {
+  display: block;
+  position: relative;
+  left: 10%;
+  top: 10px;
+  border: none;
+  outline: none;
+  width: 13%;
+  height: 30px;
+  background-color: var(--button-green);
+  color: #fff;
+  letter-spacing: 2px;
+}

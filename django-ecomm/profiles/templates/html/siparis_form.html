@@ -1,0 +1,49 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+<title> XXX </title>
+<link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+<link rel="stylesheet" href=" {% static 'css/siparis_form.css' %} ">
+{% endblock %}
+
+{% block base %}
+
+    <div class="container">
+        <div class="siparis-form">
+            
+            <form action=" {% url 'profiles:siparis' urun.id %} " method="POST">
+                {% csrf_token %}
+                <label>Adet: <select id="adet" name="adet">
+                </select></label>
+    
+               <label>Ad: <input type="text" required id="ad" name="ad"></label>
+               <label>Soyad: <input type="text" required id="soyad" name="soyad"></label>
+               <label>Telefon numarası: <input type="tel" required id="tel" name="tel"></label>
+               <label>Adres: <input type="text" required id="adres" name="adres"></label>
+               <label>Kart güvenlik kodu: <input type="tel" required id="kgk" name="kgk"></label>
+               <label>Kart son kullanma tarihi: <input type="tel" required min='2' max='2' id="skt1" name="skt1"> / <input type="tel" min='2' max='2' id="skt2" name="skt2"></label>
+    
+               <button id="buy2" type="submit">Satın al</button>
+            </form>
+           
+        </div>
+    </div>
+
+    <script>
+        const adetSelect = document.getElementById('adet');
+
+        for(var i = 1; i <= 50; i++){
+            const option = document.createElement('option');
+            option.textContent=i;
+            option.value=i;
+            adetSelect.appendChild(option);
+        }
+    </script>
+    
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title> {{category_name}} </title>
+{% endblock %}
+
+{% block content %}
+
+
+<style>
+
+label{
+  display: none;
+}
+
+
+.cat-post {
+  display: block;
+  text-align: center;
+  margin-top: 5%;
+}
+
+section {
+  margin-top: 10px;
+  margin-left: 32%;
+  margin-right: 32%;
+}
+
+.cat-post-item {
+  background-color: #ffc1cc;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+#cat-post-author {
+  font-size: 14px;
+  background-color: #dd8c9b;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+#cat-post-text {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+  background-color: #e491a0;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#cat-post-pubdate {
+  font-size: 14px;
+  background-color: #ffadbc;
+}
+
+#cat-post-likes {
+  font-size: 14px;
+  background-color: #f3a8b6;
+}
+
+#cat-post-like-button {
+  background-color: #e491a0;
+  width: 10%;
+  height: 5%;
+  padding-bottom: 3px;
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  outline: none;
+}
+
+
+#cat-name{
+  background-color: rgb(226, 86, 112);
+  font-size: 35px;
+  color: rgba(255,255,255,0.8);
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#id_text{
+  display: inline;
+  width: 36%;
+  border:none;
+  outline: none;
+  background-color: #fadd95 ;
+  box-sizing: border-box;
+  padding:20px;
+  resize: none;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+  
+}
+
+
+#post{
+  display: block;
+}
+
+
+#send-button{
+  width: 36%;
+  height: 30px;
+  border: none;
+  outline: none;
+  color:rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: #eb92a2 ;
+}
+
+#send-button:hover{
+  transition: 0.4s;
+  background-color: #da6e82 ;
+}
+
+
+#comments{
+  text-decoration: none;
+  color: rgb(219, 58, 87);
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+@media (max-width: 480px) {
+  #id_text{
+    width: 80%;
+    height: 220px;
+  }
+  section{
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+
+</style>
+
+
+<div>
+
+    <article class = 'cat-post'>
+        <h1 id = 'cat-name'> {{category_name}} </h1>
+      <div id ='post'>
+        
+        {% if request.user.is_authenticated %}
+          <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value='Send' id = 'send-button'>
+          </form>
+        {% endif %}
+      
+        <br>
+      </div>
+        {% for post in category_posts %}
+        <section>
+            <p class = 'cat-post-item' id = 'cat-post-text'>{{post.text}}</p>
+            <h4 class = 'cat-post-item' id = 'cat-post-author'>{{post.author}}</h4>
+            <p class = 'cat-post-item' id = 'cat-post-pubdate'>{{post.pub_date|date:"d/m/Y G:i"}}</p>
+            <p class = 'cat-post-item' id = 'cat-post-likes'>{{post.likes.all|length}} likes</p>
+            {% if request.user.is_authenticated %}
+            <form action=" {% url 'blogApp:like_post' post.id %} " method="POST" class = 'cat-post-item'>
+                {% csrf_token %}
+                <button type='submit' id = 'cat-post-like-button' value=" {{post.id}} " name = 'post_like_button'>Like</button>
+                <a href=" {% url 'blogApp:post_detail_page' post.id %} " id = 'comments'> {{post.comments.}} Comments</a>
+            </form>
+            {% endif %}
+        </section>
+        {% endfor %}
+    </article>
+
+</div>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

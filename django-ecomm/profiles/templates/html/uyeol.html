@@ -1,0 +1,47 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+    {% block head %}
+        <title>Üye ol!</title>
+        <link rel="stylesheet" href=" {% static 'css/uyeol.css' %} ">
+        <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    {% endblock %}
+
+
+    {% block base %}
+    <div class="f-container">
+        <div class="register">
+            <h1>Üye ol</h1>
+            <a href=" {% url 'profiles:magaza-ac' %} "><h1 id = 'magaza-ac'>Mağaza hesabı aç <i class="fas fa-store"></i></h1></a>
+            <form action="" class="register-form" method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <label for="ad">Ad:</label>
+                <input type="text" name = 'ad' id = 'ad' class="input">
+
+                <label for="soyad">Soyad:</label>
+                <input type="text" name = 'soyad' id = 'soyad' class="input">
+
+                <label for="k-adi">Kullanıcı adı:</label>
+                <input type="text" name='k-adi' id ='k-adi' class = 'input'>
+
+                <label for="e-mail">E-mail:</label>
+                <input type="email" name='e-mail' id ='e-mail' class = 'input'>
+                
+                <label for="sifre">Şifre</label>
+                <input type="password" name='sifre' id='sifre' class = 'input'>
+
+                <label for="sifre2">Şifre (tekrar):</label>
+                <input type="password" name='sifre2' id='sifre2' class = 'input'> 
+
+                <label for="p-fotografi">Profil fotoğrafı (tercihi):</label>
+                <input type="file" name = 'p-fotografi' id = 'p-fotografi' class = 'input'>
+
+                <input type="submit" value="Kaydol">
+
+
+            </form>
+        </div>
+    </div>
+    {% endblock %}

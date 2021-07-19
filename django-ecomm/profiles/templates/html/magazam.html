@@ -1,0 +1,89 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+
+<title> Mağazam -- {{magaza.gorunen_ad}} </title>
+<link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+<link rel="stylesheet" href=" {% static 'css/magazam.css' %} ">
+
+{% endblock %}
+
+
+{% block base %}
+
+    <div class="container">
+        <div class="magazam-container">
+            <div class="head">
+                <h1>Mağaza bilgileri</h1>
+                <hr>
+                {% if magaza.profil_fotografi %}
+                    <img src=" {{magaza.profil_fotografi.url}} " alt=" {{magaza.gorunen_ad}} ">
+                {% endif %}
+                <p> {{magaza.giris_adi}} </p>
+                <p> {{magaza.gorunen_ad}} </p>
+                <p> {{magaza.kayit_tarihi}} </p>
+                <div class="tanitim">
+                    <p>
+                        {{magaza.tanitim}}
+                    </p>
+                </div>
+            </div>
+            <div class="main">
+                <div class="para">
+                    <p> <strong>Bekleyen para: </strong> {{magaza.bekleyen_para}} </p>
+                    <p> <strong>Brüt kazanç: </strong> {{magaza.brut_kazanc}} </p>
+                    <p> <strong>Net kazanç: </strong> {{magaza.net_kazanc}} </p>
+                </div>
+                <p> <strong>Puan: </strong> {{magaza.ortalama_puan}} </p>
+            </div>
+            <div class="foot">
+                <h1> Ürünler </h1>
+                <hr>
+                {% if urunler %}
+                    {% for urun in urunler %}
+                        <div class="urun">
+                            <h3> {{urun.ad}} </h3>
+                            <h4> {{urun.fiyat}} ₺ </h4>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <h1>Ürününüz yok.</h1>
+                {% endif %}
+                {% if siparisler %}
+                <h1>Siparişler</h1>
+                    <div class="siparis-container">
+                
+                        {% for siparis in siparisler %}
+                        
+                            <div class="siparis">
+                                <p> {{siparis.urun.ad}} </p>
+                                <p> {{siparis.satin_alan_ad}} {{siparis.satin_alan_soyad}} </p>
+                                <p> {{siparis.adet}} adet. </p>
+                                <p> {{siparis.siparis_tarihi}} </p> 
+                                    {% if siparis.kargoya_verilme_tarihi %}
+                                        <p> <strong>Kargoya verildi:</strong> {{siparis.kargoya_verilme_tarihi}} </p>
+                                    {% endif %}
+                                    {% if siparis.tamamlandi %}
+                                        <p> Sipariş teslim edildi. </p>
+                                    {% else %}
+                                        <p> Sipariş tamamlanmadı. </p>
+                                    {% endif %}
+                                {% if not siparis.kargoya_verilme_tarihi %}
+                                    <input class="cargo-btn" type="submit" value="Kargolandı">
+                                {% endif %}
+                                <input type="hidden" data-siparisid="{{siparis.id}}" data-csrf="{{csrf_token}}" data-userid="{{siparis.satici.id}}" class="data">
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/magazam.js' %}"></script>
+
+
+{% endblock %}
+

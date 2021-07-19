@@ -1,0 +1,55 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+
+    <title> Yeni ürün </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/yeni_urun.css' %} ">
+
+{% endblock %}
+
+{% block base %}
+
+
+    <div class="container">
+        <form action="" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Yeni ürün satışa çıkar!</h1>
+            <h3>Ürün bilgileri</h3>
+
+            <label for="ad">Ürün adı: </label>
+            <input type="text" name="ad" id="ad" required>
+            
+            <label for="aciklama">Ürün açıklaması: </label>
+            <textarea name="aciklama" id="aciklama" cols="30" rows="10" required></textarea>
+
+            <label for="resim">Ürün resmi: </label>
+            <input type="file" name="resim" id="resim" required>
+
+            <label for="fiyat">Ürün fiyatı: (₺)</label>
+            <input type="tel" name="fiyat" id="fiyat" required>
+
+            {% if kategoriler %}
+                <label for="kategoriler">Ürün kategorisi: </label>
+                <select name="kategoriler" id="kategoriler" required>
+                    {% for kategori in kategoriler %}
+                        <option value=" {{kategori.ad}} "> {{kategori.ad}} </option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+
+            <label for="k_ucreti">Kargo ücreti: (₺)</label>
+            <input type="tel" name="k_ucreti" id="k_ucreti" required>
+
+            <input type="submit" id="done" value="Tamam">
+
+
+        </form>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Hesabım | {{request.user.username}} </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/hesap.css' %} ">
+{% endblock %}
+
+
+{% block base %}
+
+<div class="container">
+    <div class="hesap-container">
+
+        <h2 id="acc-info-title">Hesap bilgileriniz</h2>
+        <div class="acc-info">
+            {% if kullanici.profil_fotografi %}
+                <img src=" {{kullanici.profil_fotografi.url}} " alt=" {{kullanici.user.username}} " id="p-foto">
+                <h3>Kullanıcı adı: <span>{{kullanici.user.username}} </span> </h3>
+                <h3>Toplam harcadığınız para: <span>{{kullanici.toplam_harcanan_para}} ₺</span> </h3>
+                <h4> Kayıt tarihi: <span>{{kullanici.kayit_tarihi}}</span> </h4>
+            {% else %}
+                <h3>Kullanıcı adı: <span>{{kullanici.user.username}}</span> </h3>
+                <h3>Toplam harcadığınız para: <span>{{kullanici.toplam_harcanan_para}}</span> </h3>
+                <h4> Kayıt tarihi: <span>{{kullanici.kayit_tarihi}}</span> </h4>
+            {% endif %}
+        </div>
+
+
+
+
+        <h2>Satın aldığınız ürünler</h2>
+        <div class="bought">
+            {% if satin_aldiklari %}
+                {% for urun in satin_aldiklari %}
+
+                    <div class="urun" onclick="location.href='/urun/{{urun.slug}}' ">
+                        {% if urun.urun_resmi %}
+                            <img src=" {{urun.get_urun_resmi}} " alt=" {{urun.ad}} ">
+                            <h3> {{urun.ad|slice:"0:50"}}... </h3>
+                            <h4> {{urun.fiyat}} ₺</h4>
+                            <h5> {{urun.satici}} </h5>
+                        {% elif urun.urun_resmi_url %}
+                            <img src=" {{urun.urun_resmi_url}} " alt=" {{urun.ad}} ">
+                            <h3> {{urun.ad|slice:"0:50"}}... </h3>
+                            <h4> {{urun.fiyat}} ₺</h4>
+                            <h5> {{urun.satici}} </h5>
+                        {% else %}
+                            <h3> {{urun.ad|slice:"0:50"}}... </h3>
+                            <h4> {{urun.fiyat}} ₺</h4>
+                            <h5> {{urun.satici}} </h5>
+                        {% endif %}
+                    </div>
+                
+                {% endfor %}
+            {% else %}
+                <small>Herhangi bir ürün satın almadınız.</small>
+
+            {% endif %}
+        </div>
+        <br/><br/>
+        <div class="siparisler">
+            {% if siparisler %}
+                <h2>Siparişleriniz</h2>
+                {% for siparis in siparisler %}
+                    <div class="siparis">
+
+                        <h3 class="s-u-ad"> {{siparis.urun.ad}} </h3>
+                        <h4 class="s-tarih"> {{siparis.siparis_tarihi}} </h4>
+                        {% if siparis.kargoya_verilme_tarihi %}
+                            <h4 class="s-k-tarih">Kargolandı: {{siparis.kargoya_verilme_tarihi}} </h4>
+                            {% if not siparis.tamamlandi %}
+                                <input type="submit" class="teslim-alindi" value="Teslim alındı." data-urunid = '{{siparis.urun.id}}' data-saticiid = '{{siparis.satici.id}}' data-adet = '{{siparis.adet}}' data-siparisid = '{{siparis.id}}' data-csrf = "{{csrf_token}}">
+                            {% else %}
+                                <small class="s-ok">Teslim alındı.</small>
+                            {% endif %}
+                        {% endif %}
+                        <h4> {{siparis.satici.gorunen_ad}} </h4>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Siparişiniz yok.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<script src=" {% static 'js/hesap.js' %} "></script>
+
+
+
+{% endblock %}
+
+
+
+
+
+

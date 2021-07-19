@@ -1,0 +1,43 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Mağaza hesabı oluştur! </title>
+    <link rel="stylesheet" href=" {% static 'css/magazaac.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+{% endblock %}
+
+{% block base %}
+
+<div class="magaza-form">
+    <form action="" method = 'POST' enctype="multipart/form-data">
+    <h1>Mağaza aç</h1>
+    <br>
+        {% csrf_token %}
+        
+        <label for="ad">Mağaza adı: </label>
+        <input type="text" id = 'ad' class = 'input' name ='ad' required>
+
+        <label for="email">E-mail: </label>
+        <input type="email" class = 'input' name = 'email' required>
+
+        <label for="sifre">Şifre:</label>
+        <input type="password" id = 'sifre' class = 'input' name = 'sifre' required>
+        
+        <label for="tanitim">Tanıtım: </label>
+        <textarea name="tanitim" id="tanitim" cols="90" rows="10" class="input" required></textarea>
+        
+        <label for="m-foto">Mağaza fotoğrafı(tercihi): </label>
+        <input type="file" id = 'm-foto' class = 'input' name = 'm-foto'>
+        
+        <input type="submit" value="Mağaza aç">
+
+    </form>
+</div>
+
+
+
+
+{% endblock %}
+
+

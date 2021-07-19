@@ -1,0 +1,123 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> {{urun.ad}} </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/urun_detay.css' %} ">
+{% endblock %}
+
+{% block base %}
+
+    <section class="container">
+        <div class="detail-container">
+            <span class="head">
+                <div class="product-info">
+                    <h1> {{urun.ad}} </h1>
+                    <p> {{urun.fiyat}} ₺ </p>
+                    {% if not isMagaza %}
+
+                        <div class="btns">
+                            {% if urun in user_sepet %}
+                            <span><small>Ürün sepetinizde.</small></span>
+                            {% else %}
+                            <button id="add-to-cart" class="prod-btn" data-urunid="{{urun.id}}">Sepete ekle</button>
+                            {% endif %}
+                            <!--<button id="add-to-cart" class="prod-btn" data-urunid="{{urun.id}}">Sepete ekle</button>-->
+                            <a href="/satin-al/{{urun.slug}}">Satın al</a>
+                        </div>
+
+                    {% endif %}
+                    <p onclick="location.href='/kategori/{{urun.kategori.slug}} ' " style="font-size: 16px ; cursor: pointer;"> {{urun.kategori.ad}} </p>
+                </div>
+                <div class="seller">
+                    <p><strong>Mağaza: </strong><a href="#" id = "seller-name">{{urun.satici|cut:"Mağaza: "}}</a></p>
+                    <p><strong>Puan: </strong>{{urun.satici.ortalama_puan}}</p>
+                    {% if magazanin_diger_urunleri %}
+                        <ul class="other-products">
+                            <h4>Bu mağazanın diğer ürünleri</h4>
+                            {% for urun in magazanin_diger_urunleri %}
+                                    <a href=" {% url 'profiles:urun-detay' urun.slug %} ">
+                                        {{urun.ad}}
+                                        {{urun.fiyat}} ₺
+                                    </a>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </span>
+            <span class="main">
+                <div class="image">
+                    {% if urun.urun_resmi_url %}
+                        <img src=" {{urun.urun_resmi_url}} " alt=" {{urun.ad}} ">
+                    {% elif urun.urun_resmi %}
+                        <img src=" {{urun.get_urun_resmi|default_if_none:'#' }} " alt=" {{urun.ad}} ">
+                    {% endif %}
+                </div>
+                <div class="main-prod-info">
+                    <h2>Ürün açıklaması</h2>
+                    <p id = 'shipment-fee'> Kargo ücreti: {{urun.kargo_ucreti}} ₺ </p>
+                    <article>
+                        <section id='date'>
+                            {{urun.kayit_tarihi}}
+                        </section>
+                        <section id='info'>
+                            {{urun.aciklama}}
+                        </section>
+                        
+                    </article>
+                </div>
+            </span>
+        </div>
+
+    <input type="hidden" data-csrf="{{csrf_token}} " data-user="{{request.user.id}}" data-seller="{{urun.satici.id}}" id="data">
+   
+   </section>
+    <div class="comments">
+            {% if not user_has_yorum %}
+                <h3>Ürün'ü yorumla.</h3>
+                <div class="comment-form">
+                    <form action=" {% url 'profiles:yorumla' urun.slug %} " method="POST">
+                        {% csrf_token %}
+                        <select name="puan" id="puan">
+                            
+                        </select>
+                        <label>Başlık: <input type="text" name="baslik" id="baslik"></label>
+                        <label>Yorum: <textarea name="yorum" id="yorum" cols="30" rows="10"></textarea></label>
+                        <input type="submit" value="Yorum yap" id="yorum-btn">
+                    </form>
+                </div>
+            {% else %}
+                <h3>Bu ürüne yorum yaptınız.</h3>
+            {% endif %}
+        <div class="yorumlar">
+            {% if yorumlar %}
+                {% for yorum in yorumlar %}
+                    <div class="yorum">
+                        <h3> Puan: {{yorum.puan}} </h3>
+                        <h3> {{yorum.baslik}} </h3>
+                        <div class="icerik">
+                            {{yorum.icerik}}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Bu ürün için hiç yorum yok.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src=" {% static 'js/urun_detay.js' %} "></script>
+
+    <script>
+        const puanSelect = document.getElementById('puan');
+
+        for(var i=1; i<=10; i++){
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            puanSelect.appendChild(option);
+        }
+    </script>
+
+{% endblock %}

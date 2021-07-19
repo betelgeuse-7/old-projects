@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!-- Django stopped loading CSS files after a while. When I made changes in a css file it
+    got applied the next morning. So I started to style pages in html docs. <style></style> -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Base</title>
+    {% endblock %}
+    <link rel="stylesheet" href=" {% static 'css/base.css' %} ">
+</head>
+<body>
+            <ul id = 'navbar'>
+                <li class = 'navbar-item'> <a href=" {% url 'blogApp:index_page' %} ">Home</a> </li>
+                <li class = 'navbar-item'> <a href=" {% url 'blogApp:category_page' %} ">Topics</a> </li>
+                {% if request.user.is_authenticated %}
+                <li class = 'navbar-item'> <a href=" /profile/{{request.user.id}} ">Profile</a> </li>
+                <li class = 'navbar-item'> <a href=" {% url 'blogApp:logout_page' %} ">Logout</a> </li>
+                {% else %}
+                <li class = 'navbar-item'> <a href=" {% url 'blogApp:register_page' %} ">Register</a> </li>
+                <li class = 'navbar-item'> <a href=" {% url 'blogApp:login_page' %} ">Login</a> </li>
+                {% endif %}
+            </ul>
+    {% block content %}
+
+    
+    {% endblock %}
+</body>
+</html>

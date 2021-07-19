@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title> Results for {{query_keyword}} </title>
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+    #user{
+        font-size: 25px;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 2%;
+        border-top: 1px solid rgba(0, 0, 0, .3);
+        border-bottom: 1px solid rgba(0, 0, 0, .3);
+    }
+
+    #user a{
+        text-decoration: none;
+        color: rgba(0,0,0,.7);
+    }
+
+</style>
+
+
+{% if user_query_results %}
+
+{% for user in user_query_results %}
+
+<div id ='user'>
+    <a href=" {% url 'blogApp:profile_detail_page' user.id %} ">{{user}}</a>
+</div>
+
+{% endfor %}
+
+
+{% else %}
+
+<p id ='no results'>No results</p>
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'html/base.html' %}
+
+{% load static %}
+
+
+{% block head %}
+
+    <title>Mağaza: {{magaza.gorunen_ad}} </title>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/magaza_detay.css' %} ">
+
+{% endblock %}
+
+{% block base %}
+
+    <div class="container">
+        <div class="magaza-detay">
+            {% if magaza.profil_fotografi %}
+                 <img src="{{magaza.profil_fotografi.url}} " alt="{{magaza.gorunen_ad}}">
+            {% endif %}
+            <h1>
+                Mağaza: {{magaza.gorunen_ad}}
+                <small> Puan: {{magaza.ortalama_puan}} </small>
+            </h1>
+            <div class="info">
+                {{magaza.tanitim}}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad sed pariatur. Eius, beatae natus. Vitae pariatur vero cumque aperiam autem repellendus accusantium aliquid odit, exercitationem laudantium quaerat. Quibusdam, tempore?
+            </div>
+        </div>
+
+        <h2 id="urunler-title">{{magaza.gorunen_ad}} ürünleri</h2>
+        <div class="urunler">
+            {% if urunler %}
+                {% for urun in urunler %}
+                    <div class="urun" onclick="location.href='/urun/{{urun.slug}}/' ">
+                        {% if urun.urun_resmi %}
+                             <img src=" {{urun.get_urun_resmi}} " alt="{{urun.ad}}">
+                        {% elif urun.urun_resmi_url %}
+                            <img src=" {{urun.urun_resmi_url}} " alt="{{urun.ad}}">
+                        {% endif %}
+                        <h3> {{urun.ad}} </h3>
+                        <small> {{urun.fiyat}} </small>
+                        <small> {{urun.kategori.ad}} </small>
+                        <small> {{urun.puan}} </small>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <h1>Ürün yok.</h1>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

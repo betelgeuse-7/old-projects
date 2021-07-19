@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href=" {% static 'css/post.css' %} ">
+</head>
+<h1>Send a post!</h1>
+<div class="form-group">
+        <title>Posts</title>
+
+        <form action="" method = 'POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" value = 'Send'>
+        </form>
+
+        {% if posts %}
+        <div class = 'container'>
+            {% for post in posts %}
+            <div class="card">
+                <p class="title">{{post.title}}</p>
+                <p class="author">by <strong>{{post.author}}</strong></p>
+                <p class="date">date: <em><strong>{{post.date}}</strong></em></p>
+                <div class="content"><em>{{post.content}}</em></div>
+                {% if post.image %}
+                    <img src=" {{post.image.url}} " alt="Image not found" class="image">
+                {% endif %}
+                <form action="delete/{{post.id}} " method="DELETE">
+                    {% csrf_token %}
+                    {% if request.user == post.author %}
+                     <input type="submit" class="btn btn-danger" value="Delete">
+                    {% endif %}
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-danger">No posts here :(</div>
+        {% endif %}
+    {% endblock %}
+</div>

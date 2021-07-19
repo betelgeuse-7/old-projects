@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}
+        <title>Base</title>
+        <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+    {% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <section class="navbar">
+        <span class="logo" onclick="window.location = '{% url 'profiles:index' %}' "><img src=" {% static 'profile.png' %} " alt="m11" id ='logo'></span>
+        <span class="search">
+            <form action="{% url 'profiles:urun-ara' %}" id="arama-form" method="POST">
+                {% csrf_token %}
+                <input type="search" class="search-input" placeholder="Ürünler içinden arama yapın." id="prod-search" data-csrf="{{csrf_token}}" name="query">
+                <!--<button class="search-icon" id="arama-btn" type="submit" style="border:none;outline:none;"><i class="fas fa-search" id="prod-search-btn" ></i></button>-->
+            </form>
+        </span>
+        </span>
+        <span class="account">
+                {% if request.user.is_authenticated %}
+                    <span><small>Hoşgeldiniz {{request.user.username}} </small></span>
+                    {% if not isMagaza %}
+                        <h3 id="my-acc">Hesabım</h3>
+                        <div class="acc-dropdown hidden">
+                            <a href=" /{{k_slug}}/hesap/ ">Hesabım</a>
+                            <a href=" /{{k_slug}}/sepet/ ">Sepet</a>
+                        </div>
+                    {% else %}
+                    <a href="{% url 'profiles:magazam' %}" id="my-acc" style="display: block;">Mağazam</a>
+                    {% endif %}
+                    <!--<a href=" {% url 'profiles:cikis' %} ">Çıkış yap</a>-->
+                {% else %}
+                    <a href=" {% url 'profiles:giris' %} " class='auth'>Giriş yap</a>
+                    <a href=" {% url 'profiles:uye-ol' %} " class='auth' id = 'register'>Üye ol</a>
+                {% endif %}
+        </span>
+    </section>
+    {% block base %}
+
+    {% endblock %}
+
+
+    <!--<script src=" {% static 'js/urun_ara.js' %} "></script>-->
+    <script src=" {% static 'js/index.js' %} "></script>
+</body>
+</html>

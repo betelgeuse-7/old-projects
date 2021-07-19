@@ -1,0 +1,198 @@
+body {
+  padding-bottom: 100px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.detail-container {
+  width: 1400px;
+  height: auto;
+  padding: 70px 30px;
+  border: 2px solid var(--border-color);
+  margin-top: 10px;
+}
+
+.head {
+  font-weight: 450;
+  float: right;
+  width: 500px;
+  margin: 0px 10px 0px 0px;
+}
+
+.head .seller {
+  font-size: 18px;
+  height: auto;
+  border: 2px solid var(--border-color);
+  padding: 15px 50px;
+}
+
+.seller strong {
+  color: var(--link-color);
+}
+
+#seller-name {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.head .product-info {
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.product-info p {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--link-color);
+  display: inline;
+}
+
+#shipment-fee {
+  font-size: 17px;
+  color: var(--button-green);
+  display: block;
+  margin-top: 15px;
+}
+
+.product-info h1 {
+  width: 70%;
+}
+
+.other-products {
+  margin-bottom: 50px;
+  height: auto;
+}
+
+.other-products a {
+  font-size: 16px;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 8px;
+  display: block;
+  transition: 0.3s;
+}
+
+.other-products h4 {
+  margin-bottom: 6px;
+  margin-top: 6px;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.other-products a:hover {
+  background-color: var(--link-color);
+  color: #fff;
+}
+
+.other-fiyat {
+  float: right;
+  font-size: 13px;
+}
+
+.image {
+  width: 400px;
+}
+
+.image img {
+  border: none;
+  position: relative;
+  bottom: 40px;
+}
+
+.main img {
+  width: 100%;
+  margin: 30px 0px 0px 100px;
+}
+
+.main-prod-info {
+  width: 55%;
+}
+
+.main-prod-info p {
+  text-align: left;
+}
+
+.main-prod-info h2 {
+  font-weight: 550;
+  font-size: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+#date {
+  font-weight: 450;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+#info {
+  width: 90%;
+  line-height: 30px;
+  padding: 20px 40px;
+}
+
+.prod-btn {
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+#add-to-cart {
+  background-color: var(--link-color);
+}
+
+#add-to-cart:hover {
+  background-color: rgb(42, 57, 196);
+}
+
+#buy {
+  background-color: var(--button-green);
+}
+
+#buy:hover {
+  background-color: rgb(65, 151, 39);
+}
+
+.comments {
+  margin-left: 310px;
+  margin-top: 50px;
+}
+
+.comments * {
+  display: block;
+}
+
+#puan {
+  width: 70px;
+  font-size: 20px;
+  height: 40px;
+  padding-left: 15px;
+}
+
+#baslik {
+  width: 250px;
+  height: 40px;
+  padding-left: 10px;
+}
+
+#yorum {
+  width: 550px;
+  height: 300px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+#yorum-btn {
+  width: 80px;
+  height: 35px;
+  margin-top: 15px;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--button-green);
+  border: none;
+}

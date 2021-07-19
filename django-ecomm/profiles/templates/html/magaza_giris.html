@@ -1,0 +1,35 @@
+{% extends 'html/base.html' %}
+
+{% load static %}
+
+
+{% block head %}
+
+    <title>Mağaza girişi</title>
+    <link rel="stylesheet" href=" {% static 'css/giris.css' %} ">
+    <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+
+{% endblock %}
+
+
+{% block base %}
+
+    <div class="form-container">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for=" email ">E-mail:</label>
+            <input type="email" name = 'email' class = 'input'>
+            
+            <label for=" sifre ">Şifre:</label>
+            <input type="password" name = 'sifre' class = 'input'>
+
+            <input type="submit">
+        </form>
+
+    </div>
+
+
+{% endblock %}
+
+

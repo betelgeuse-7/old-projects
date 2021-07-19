@@ -1,0 +1,57 @@
+{% extends 'html/base.html' %}
+{% load static %}
+    {% block head %}
+
+        <title>m11 | Hoşgeldiniz</title>
+        <link rel="stylesheet" href=" {% static 'css/index.css' %} ">
+
+    {% endblock %}
+
+    {% block base %}
+
+        <body>
+            <div class="container">
+                <section class="side-bar">
+                    <div class="cat-strip">
+                        <h2>Tüm kategoriler</h2>
+                        <ul>
+                            {% for kategori in kategoriler %}
+                                <li onclick="location.href= ' /kategori/{{kategori.slug}} ' ">{{kategori.ad}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="sellers">
+                        <h2>Mağazalar</h2>
+                        <span class="s-search">
+                            <input type="search" placeholder="Mağaza ara"><i class="fas fa-search"></i>
+                        </span>
+                        <ul>
+                            {% for magaza in magazalar %}
+                            <li onclick="window.location.href='/magaza/{{magaza.slug}}/'"> {{magaza.gorunen_ad}} </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+            
+                <div class="feed">
+                    {% if urunler %}
+                        {% for urun in urunler %}
+                        <span class="card">
+                                {% if urun.urun_resmi_url %}
+                                    <a href=" {% url 'profiles:urun-detay' urun.slug %} "><img src=" {{urun.urun_resmi_url}} " alt=" {{urun.ad}} "></a>
+                                {% elif urun.urun_resmi %}
+                                    <a href=" {% url 'profiles:urun-detay' urun.slug %} "><img src=" {{urun.get_urun_resmi|default_if_none:'#'}} " alt=" {{urun.ad}} "></a>
+                                {% endif %}
+                                <p> <a href=" {% url 'profiles:urun-detay' urun.slug %} ">{{urun.ad|truncatechars:"50"}}</a> </p>
+                                <h4> {{urun.fiyat}} ₺ </h4>
+                            </span>
+                        {% endfor %}    
+                    {% else %}
+                    <h1>Ürün yok.</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </body>
+
+    {% endblock %}
+

@@ -1,0 +1,36 @@
+.urun-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(220px, auto);
+  grid-gap: 10px;
+  width: 870px;
+  height: auto;
+  padding: 35px;
+}
+
+.urun img {
+  width: 230px;
+  height: 220px;
+}
+
+.urun h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.urun {
+  cursor: pointer;
+  margin: 15px;
+  border-bottom: 2px solid var(--border-color);
+  padding: 10px;
+}
+
+.satici {
+  color: var(--link-color);
+  font-size: 15px;
+}
+
+#title {
+  font-weight: 500;
+  margin: 15px;
+}
